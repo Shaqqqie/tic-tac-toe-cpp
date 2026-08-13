@@ -3,8 +3,8 @@
 void display_board(char board[]);
 
 int main(){
-    char board[] {'1','2','3','4','5','6','7','8','9'};
-
+    char board[9] {'1','2','3','4','5','6','7','8','9'};
+    char player1 = 'X'; 
 
     //initial board display
     display_board(board);
