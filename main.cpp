@@ -5,26 +5,24 @@ bool check_win(char board[]);
 
 int main(){
     char board[9] {'1','2','3','4','5','6','7','8','9'};
-    char player1 = 'X';
-    char player2 = 'O'; 
+    char current_player = 'X';
 
     //initial board display
     while(true){
         display_board(board);
 
-        int number_player1{};
+        int current_player_move{};
         std::cout << "Player 1, enter your choice: ";
-        std::cin >> number_player1;
+        std::cin >> current_player_move;
         //update board
-        board[number_player1 - 1] = player1;
+        board[current_player_move - 1] = current_player;
         display_board(board);
         if(check_win(board) == true){
             std::cout << "We have a winner!!!";
             break;
         }
     }
-    //check  win
-    //if not win
+    
     // switch to player 
 }
 
