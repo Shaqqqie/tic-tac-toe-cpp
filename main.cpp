@@ -93,8 +93,26 @@ bool check_win(char board[]){
 }
 
 bool check_draw(char board[]){
-    for(int i{0}; i < 9; ++i){
-        if(board[i] != 'X' && board[i] != 'O'){
+    int win_condition[8][3]{
+        {0,1,2},
+        {3,4,5},
+        {6,7,8},
+        {0,3,6},
+        {1,4,7},
+        {2,5,8},
+        {6,4,2},
+        {0,4,8}
+    };
+
+    for(int row{0}; row < 8; ++row){
+        int a = win_condition[row][0];
+        int b = win_condition[row][1];
+        int c = win_condition[row][2];
+
+        bool x_can_win = board[a] != 'O' && board[b] != 'O' && board[c] != 'O';
+        bool o_can_win = board[a] != 'X' && board[b] != 'X' && board[c] != 'O';
+
+        if(x_can_win || o_can_win){
             return false;
         }
     }
