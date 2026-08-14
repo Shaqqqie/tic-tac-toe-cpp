@@ -1,7 +1,8 @@
 #include <iostream>
 
-void display_board(char board[]);
-bool check_win(char board[]);
+void display_board(char []);
+bool check_win(char []);
+bool valid_move(char [], int);
 
 int main(){
     char board[9] {'1','2','3','4','5','6','7','8','9'};
@@ -9,33 +10,40 @@ int main(){
 
     //initial board display
     while(true){
+        //initial board display
         display_board(board);
 
+        //input
         int current_player_move{};
-        std::cout << "Player " << current_player << ", enter your choice: ";
+        std::cout << "Player " << current_player << ", enter your choice(1-9): ";
         std::cin >> current_player_move;
-        //update board
-        board[current_player_move - 1] = current_player;
-        display_board(board);
+        
+        //Input validation
+        if(valid_move(board, current_player_move) == true){
+            //update board
+            board[current_player_move - 1] = current_player;
+            display_board(board);
+        }
+        else{
+            continue;
+        }
+        //check win
         if(check_win(board) == true){
             std::cout << "We have a winner!!!";
             break;
         }
+        //swap player
         else{
             if(current_player == 'X'){
             current_player = 'O';
             }
             else if(current_player == 'O'){
-            current_player = 'X';
+                current_player = 'X';
             }
         }
-        
     }
 }
     
-    // switch to player 
-
-
 void display_board(char board[]){
     std::cout << "\n";
     std::cout << " " << board[0] << " | " << board[1] << " | " << board[2] << "\n";
@@ -67,4 +75,18 @@ bool check_win(char board[]){
         }
     }
     return false;
+}
+
+bool valid_move(char board[], int current_player_move){
+    if(current_player_move < 1 || current_player_move > 9){
+        std::cout << "Invalid move, please try again";
+        return false;
+    }
+    else if(board[current_player_move - 1] == 'X' || board[current_player_move - 1] == 'O'){
+        std::cout << "This space has already been played!";
+        return false;
+    }
+    else{
+        return true;
+    }
 }
