@@ -1,38 +1,39 @@
 #include <iostream>
 
 void display_board(char []);
-bool check_win(char []);
 bool valid_move(char [], int);
+bool check_win(char []);
+bool check_draw(char[]);
+
 
 int main(){
     char board[9] {'1','2','3','4','5','6','7','8','9'};
     char current_player = 'X';
 
-    //initial board display
     while(true){
-        //initial board display
+        
         display_board(board);
 
-        //input
         int current_player_move{};
         std::cout << "Player " << current_player << ", enter your choice(1-9): ";
         std::cin >> current_player_move;
         
-        //Input validation
         if(valid_move(board, current_player_move) == true){
-            //update board
             board[current_player_move - 1] = current_player;
             display_board(board);
         }
         else{
             continue;
         }
-        //check win
+        
         if(check_win(board) == true){
             std::cout << "We have a winner!!!";
             break;
         }
-        //swap player
+        else if(check_draw(board) == true){
+            std::cout << "It's a draw!";
+            break;
+        }
         else{
             if(current_player == 'X'){
             current_player = 'O';
@@ -51,6 +52,20 @@ void display_board(char board[]){
     std::cout << " " << board[3] << " | " << board[4] << " | " << board[5] << "\n";
     std::cout << "---+---+---" << "\n";
     std::cout << " " << board[6] << " | " << board[7] << " | " << board[8] << "\n";
+}
+
+bool valid_move(char board[], int current_player_move){
+    if(current_player_move < 1 || current_player_move > 9){
+        std::cout << "Invalid move, please try again.";
+        return false;
+    }
+    else if(board[current_player_move - 1] == 'X' || board[current_player_move - 1] == 'O'){
+        std::cout << "This space has already been played!";
+        return false;
+    }
+    else{
+        return true;
+    }
 }
 
 bool check_win(char board[]){
@@ -77,16 +92,11 @@ bool check_win(char board[]){
     return false;
 }
 
-bool valid_move(char board[], int current_player_move){
-    if(current_player_move < 1 || current_player_move > 9){
-        std::cout << "Invalid move, please try again";
-        return false;
+bool check_draw(char board[]){
+    for(int i{0}; i < 9; ++i){
+        if(board[i] != 'X' && board[i] != 'O'){
+            return false;
+        }
     }
-    else if(board[current_player_move - 1] == 'X' || board[current_player_move - 1] == 'O'){
-        std::cout << "This space has already been played!";
-        return false;
-    }
-    else{
-        return true;
-    }
+    return true;
 }
