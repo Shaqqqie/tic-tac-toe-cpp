@@ -12,7 +12,7 @@ int main(){
         display_board(board);
 
         int current_player_move{};
-        std::cout << "Player 1, enter your choice: ";
+        std::cout << "Player " << current_player << ", enter your choice: ";
         std::cin >> current_player_move;
         //update board
         board[current_player_move - 1] = current_player;
@@ -21,10 +21,20 @@ int main(){
             std::cout << "We have a winner!!!";
             break;
         }
+        else{
+            if(current_player == 'X'){
+            current_player = 'O';
+            }
+            else if(current_player == 'O'){
+            current_player = 'X';
+            }
+        }
+        
     }
+}
     
     // switch to player 
-}
+
 
 void display_board(char board[]){
     std::cout << "\n";
