@@ -4,45 +4,11 @@ void display_board(char []);
 bool valid_move(char [], int);
 bool check_win(char []);
 bool check_draw(char[]);
+void play_game();
 
 
 int main(){
-    char board[9] {'1','2','3','4','5','6','7','8','9'};
-    char current_player = 'X';
-
-    while(true){
-        
-        display_board(board);
-
-        int current_player_move{};
-        std::cout << "Player " << current_player << ", enter your choice(1-9): ";
-        std::cin >> current_player_move;
-        
-        if(valid_move(board, current_player_move) == true){
-            board[current_player_move - 1] = current_player;
-            display_board(board);
-        }
-        else{
-            continue;
-        }
-        
-        if(check_win(board) == true){
-            std::cout << "We have a winner!!!";
-            break;
-        }
-        else if(check_draw(board) == true){
-            std::cout << "It's a draw!";
-            break;
-        }
-        else{
-            if(current_player == 'X'){
-            current_player = 'O';
-            }
-            else if(current_player == 'O'){
-                current_player = 'X';
-            }
-        }
-    }
+    play_game();
 }
     
 void display_board(char board[]){
@@ -56,11 +22,11 @@ void display_board(char board[]){
 
 bool valid_move(char board[], int current_player_move){
     if(current_player_move < 1 || current_player_move > 9){
-        std::cout << "Invalid move, please try again.";
+        std::cout << "Invalid move, number must be between 1 and 9";
         return false;
     }
     else if(board[current_player_move - 1] == 'X' || board[current_player_move - 1] == 'O'){
-        std::cout << "This space has already been played!";
+        std::cout << "Invalid move, please choose one of the remaining numbers";
         return false;
     }
     else{
@@ -110,11 +76,49 @@ bool check_draw(char board[]){
         int c = win_condition[row][2];
 
         bool x_can_win = board[a] != 'O' && board[b] != 'O' && board[c] != 'O';
-        bool o_can_win = board[a] != 'X' && board[b] != 'X' && board[c] != 'O';
+        bool o_can_win = board[a] != 'X' && board[b] != 'X' && board[c] != 'X';
 
         if(x_can_win || o_can_win){
             return false;
         }
     }
     return true;
+}
+
+void play_game(){
+    char board[9] {'1','2','3','4','5','6','7','8','9'};
+    char current_player = 'X';
+
+    while(true){
+        
+        display_board(board);
+
+        int current_player_move{};
+        std::cout << "Player " << current_player << ", enter your choice(1-9): ";
+        std::cin >> current_player_move;
+        
+        if(valid_move(board, current_player_move) == true){
+            board[current_player_move - 1] = current_player;
+        }
+        else{
+            continue;
+        }
+        
+        if(check_win(board) == true){
+            std::cout << "We have a winner!!!";
+            break;
+        }
+        else if(check_draw(board) == true){
+            std::cout << "It's a draw!";
+            break;
+        }
+        else{
+            if(current_player == 'X'){
+            current_player = 'O';
+            }
+            else if(current_player == 'O'){
+                current_player = 'X';
+            }
+        }
+    }
 }
