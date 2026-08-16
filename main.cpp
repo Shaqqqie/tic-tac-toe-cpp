@@ -5,6 +5,7 @@ bool valid_move(char [], int);
 bool check_win(char []);
 bool check_draw(char[]);
 void play_game();
+void switch_player(char &);
 
 
 int main(){
@@ -113,12 +114,16 @@ void play_game(){
             break;
         }
         else{
-            if(current_player == 'X'){
-            current_player = 'O';
-            }
-            else if(current_player == 'O'){
-                current_player = 'X';
-            }
+            switch_player(current_player);
         }
+    }
+}
+
+void switch_player(char &player){
+    if(player == 'X'){
+        player = 'O';
+    }
+    else if(player == 'O'){
+        player = 'X';
     }
 }
