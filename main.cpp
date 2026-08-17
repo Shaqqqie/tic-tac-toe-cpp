@@ -1,10 +1,6 @@
 #include <iostream>
 
-#include "Game.h"
-
-
 int main(){
-    Game game;
-    game.play_game();
+    std::cout << "Hello world" << std::endl;
+    return 0;
 }
-    
