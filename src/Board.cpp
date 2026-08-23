@@ -8,3 +8,8 @@ void Board::display_board(){
     std::cout << "---+---+---" << "\n";
     std::cout << " " << grid[6] << " | " << grid[7] << " | " << grid[8] << "\n";
 }
+
+void Board::make_move(int current_player_move){
+    char current_player = 'X';
+    grid[current_player_move - 1] = current_player;
+}

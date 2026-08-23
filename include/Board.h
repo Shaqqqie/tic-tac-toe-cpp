@@ -10,6 +10,7 @@ private:
 
 public:
     void display_board();
+    void make_move(int);
     
 };
 
