@@ -1,6 +1,15 @@
+#include "Board.h"
 #include <iostream>
 
+
+
 int main(){
-    std::cout << "Hello world" << std::endl;
+    Board board;
+
+    board.display_board();
     return 0;
+    
 }
+
+
+
