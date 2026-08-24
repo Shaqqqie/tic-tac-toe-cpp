@@ -1,18 +1,12 @@
-#include "Board.h"
+#include "Game.h"
 #include <iostream>
 
 
 int main(){
     
-    Board board;
-
-    int number{};
-    board.display_board();
-    std::cout << "Pick a number: ";
-    std::cin >> number;
-
-    board.make_move(number);
-    board.display_board();
+    Game game;
+    game.play_game();
+    
     return  0;
     
 }
