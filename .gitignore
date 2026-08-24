@@ -1,2 +1,15 @@
+# Build
 build/
+
+# VS Code
 .vscode/
+
+# Compiled files
+*.exe
+*.o
+*.obj
+*.pdb
+
+# OS files
+.DS_Store
+Thumbs.db
