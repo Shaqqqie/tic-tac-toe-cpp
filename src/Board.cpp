@@ -12,6 +12,7 @@ void Board::display_board(){
 
 void Board::make_move(char player, int player_move){
     grid[player_move - 1] = player;
+    display_board();
 }
 
 char Board::get_cell(int position) const{
