@@ -125,11 +125,11 @@ void Game::player_vs_player(){
             continue;
         }
 
-        if(check_win() == true){
+        if(check_win()){
             std::cout << "We have a winner!!!";
             break;
         }
-        else if(check_draw() == true){
+        else if(check_draw()){
             std::cout << "It's a draw!";
             break;
         }
@@ -145,7 +145,7 @@ int Game::computer_move(){
 
     for(size_t i{0}; i < 9; ++i){
         if(board.get_cell(i) != 'X' && board.get_cell(i) != 'O'){
-            available_moves.push_back(i);
+            available_moves.push_back(i + 1);
         }
     }
 
