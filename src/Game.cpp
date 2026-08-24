@@ -73,7 +73,7 @@ bool Game::check_draw(){
     return true;
 }
 
-void Game::play_game(){
+void Game::player_vs_computer(){
     char current_player = 'X';
     board.display_board();
     while(true){
@@ -109,7 +109,35 @@ void Game::play_game(){
     }
 }
 
+void Game::player_vs_player(){
+       char current_player = 'X';
+    board.display_board();
+    while(true){
+        
+        int current_player_move{};
+        std::cout << "Player " << current_player << ", pick a number on the board(1-9): ";
+        std::cin >> current_player_move;
+       
+        if(valid_move(current_player_move) == true){
+            board.make_move(current_player, current_player_move);   
+        }
+        else{
+            continue;
+        }
 
+        if(check_win() == true){
+            std::cout << "We have a winner!!!";
+            break;
+        }
+        else if(check_draw() == true){
+            std::cout << "It's a draw!";
+            break;
+        }
+        else{
+            switch_player(current_player);
+        }
+    }
+}
 
 int Game::computer_move(){
     std::vector<int> available_moves{};
@@ -121,20 +149,16 @@ int Game::computer_move(){
         }
     }
 
+    if(available_moves.empty()){
+        return -1;
+    }
+
     std::random_device rd;
     std::mt19937 generator(rd());
 
-    std::uniform_int_distribution<std::size_t> distribution(0, available_moves.size() - 1
+    std::uniform_int_distribution<std::size_t> distribution(
+        0, available_moves.size() - 1
     );
 
-    std::size_t random_index = distribution(generator);
-
-    if(!available_moves.empty()){
-        int random_move = available_moves[distribution(generator)]; 
-        return random_move;
-    }
-    else{
-        return 1;
-    }
-    
+    return available_moves[distribution(generator)];
 }

@@ -11,7 +11,8 @@ private:
 public:
     bool check_win();   
     bool check_draw();
-    void play_game();
+    void player_vs_player();
+    void player_vs_computer();
     bool valid_move(int);
     void switch_player(char &);
     int computer_move();
